@@ -4,7 +4,6 @@ var numJugadas1=0;
 var numJugadas2=0;
 var JugadasA = new Array(3);
 var jugadasB = new Array(3);
-//var positionGanadoras=[1,2,3]
 var ganadoras = [ [0, 1, 2], [3, 4, 5] , [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8]];
 var cudraditos=$('.li');
 var turno=true;
@@ -31,6 +30,10 @@ function markerPosition(position)
 			id.append('<i class="fa fa-circle animated rubberBand " aria-hidden="true"></i>');
 			$('#mov1').text(numJugadas1);
 			turno=false;
+			if(isChampion())
+			{
+				alert("ganaste");
+			}
 		}
 	}
 	else
@@ -43,16 +46,16 @@ function markerPosition(position)
 			id.append('<i class="fa fa-heart animated rubberBand " aria-hidden="true"></i>');
 			$('#mov2').text(numJugadas2);
 			turno=true;
+			if(isChampion())
+			{
+				alert("ganaste");
+			}
 		}
 
 	}
 }
-function idChampion()
+function isChampion()
 {
-
-}
-/*
-function comprobarGanador(marcador){
 	var gana = true;
 	for( var posGanadoras = 0; posGanadoras < ganadoras.length; posGanadoras++){
 		gana = true;
@@ -65,4 +68,4 @@ function comprobarGanador(marcador){
 		gana = false;
 	}
 	return gana;
-}*/
+}
