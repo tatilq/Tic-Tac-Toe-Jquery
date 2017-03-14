@@ -2,10 +2,11 @@
 var board = new Array(9);
 var numJugadas1=0;
 var numJugadas2=0;
-var JugadasA = new Array(3);
-var jugadasB = new Array(3);
+var llenoA="fullA";
+var llenoB="fullB";
 var ganadoras = [ [0, 1, 2], [3, 4, 5] , [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8]];
 var cudraditos=$('.li');
+
 var turno=true;
 $.each(cudraditos, function() {$(this).on('click',movimiento)});
 
@@ -24,15 +25,15 @@ function markerPosition(position)
 	if(turno){
 		if(isFull(position))
 		{
-			board[position]="fullA";
+			board[position]=llenoA;
 			numJugadas1++;
 			id.find('i').remove();
 			id.append('<i class="fa fa-circle animated rubberBand " aria-hidden="true"></i>');
 			$('#mov1').text(numJugadas1);
 			turno=false;
-			if(isChampion())
+			if(isChampion(llenoA))
 			{
-				alert("ganaste");
+				console.log("ganaste");
 			}
 		}
 	}
@@ -40,32 +41,35 @@ function markerPosition(position)
 	{
 		if(isFull(position))
 		{
-			board[position]='fullB';
+			board[position]=llenoB;
 			numJugadas2++;
 			id.find('i').remove();
 			id.append('<i class="fa fa-heart animated rubberBand " aria-hidden="true"></i>');
 			$('#mov2').text(numJugadas2);
 			turno=true;
-			if(isChampion())
+			if(isChampion(llenoB))
 			{
-				alert("ganaste");
+				console.log("ganaste");
 			}
 		}
 
 	}
 }
-function isChampion()
+function isChampion(marcador)
 {
-	var gana = true;
-	for( var posGanadoras = 0; posGanadoras < ganadoras.length; posGanadoras++){
-		gana = true;
+	var flag = true;
+	for( var posGanadoras = 0; posGanadoras < ganadoras.length; posGanadoras++)
+	{
+		flag = true;
 		for( var pos = 0; pos < ganadoras[posGanadoras].length; pos++){
-			gana = gana && (celdas[ganadoras[posGanadoras][pos]] == marcador);
+			flag = flag && (board[ganadoras[posGanadoras][pos]] == marcador);
 		}
-		if (gana){
-			return gana;
+		if (flag)
+		{
+			return flag;
 		}
-		gana = false;
+		
+		flag = false;
 	}
-	return gana;
+	return flag;
 }

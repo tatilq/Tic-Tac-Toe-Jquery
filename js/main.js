@@ -14,16 +14,7 @@ function init()
   	$("#jugador2").keyup(validaJugador2); 
  	//TweenMax.from($('#saludo h1'), 1, {marginBottom:'0px', ease:Elastic.easeOut});
 }
-function  validaLocalStorageJugador1()
-{
-	return (localStorage.getItem('JugadorUno') != null);
-}
-/*******************************************************/
-function  validaLocalStorageJugador2()
-{
-	return(localStorage.getItem('JugadorDos') != null);
-}
-//-------------------------------------------VALIDA JUGADOR1 SEGUN FORMATO VALIDO----------------------------------//
+/*-------------------------------------------VALIDA JUGADOR1 SEGUN FORMATO VALIDO----------------------------------*/
 function validaJugador1()
 {
 	var isValid=false;
@@ -94,7 +85,6 @@ function onClickBtnNombre() {
       		imageUrl: "img/bads.png"
     	});
 	}
-	
 }
 function onClickBtnHistorial() {
 	gotoSection('historial');
