@@ -12,9 +12,7 @@ function init()
 	$('#historialLi').click(onClickHistorial);
 	$("#jugador1").keyup(validaJugador1); 
   	$("#jugador2").keyup(validaJugador2); 
-  	$('#juego').find('.fa-paw').click(movimiento);
-
-	//TweenMax.from($('#saludo h1'), 1, {marginBottom:'0px', ease:Elastic.easeOut});
+ 	//TweenMax.from($('#saludo h1'), 1, {marginBottom:'0px', ease:Elastic.easeOut});
 }
 function  validaLocalStorageJugador1()
 {
@@ -79,8 +77,8 @@ function onClickBtnNombre() {
 
 	if(validaJugador1()&&validaJugador2())
 	{
-    	$('#nameGame1').text("Gamer 1:"+$("#jugador1").val());
-		$('#nameGame2').text("Gamer 2:"+$("#jugador2").val());
+    	$('#nameGame1').text($("#jugador1").val()+": ");
+		$('#nameGame2').text($("#jugador2").val()+": ");
 		
 		swal({
       		title: "¡Formulario Completo!",
@@ -105,15 +103,8 @@ function gotoSection(_identificadorDeSeccion)
 {
 	currentSection.removeClass('visible');
 	var nextSection = $('#'+_identificadorDeSeccion);
-
 	nextSection.addClass('visible');
-
 	//TweenMax.from(nextSection, 1.5, {scale:0.2, opacity:0, ease:Elastic.easeOut});
 	currentSection = nextSection;
 }
 
-/**VALIDACIONES DE JUGADAS POSIBLES*/
-function movimiento()
-{
-	console.log("0");
-}
