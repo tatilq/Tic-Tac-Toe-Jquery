@@ -5,6 +5,7 @@ var numJugadas2=0;
 var JugadasA = new Array(3);
 var jugadasB = new Array(3);
 //var positionGanadoras=[1,2,3]
+var ganadoras = [ [0, 1, 2], [3, 4, 5] , [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8]];
 var cudraditos=$('.li');
 var turno=true;
 $.each(cudraditos, function() {$(this).on('click',movimiento)});
@@ -50,3 +51,18 @@ function idChampion()
 {
 
 }
+/*
+function comprobarGanador(marcador){
+	var gana = true;
+	for( var posGanadoras = 0; posGanadoras < ganadoras.length; posGanadoras++){
+		gana = true;
+		for( var pos = 0; pos < ganadoras[posGanadoras].length; pos++){
+			gana = gana && (celdas[ganadoras[posGanadoras][pos]] == marcador);
+		}
+		if (gana){
+			return gana;
+		}
+		gana = false;
+	}
+	return gana;
+}*/
