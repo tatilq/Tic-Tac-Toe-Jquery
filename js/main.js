@@ -2,6 +2,7 @@
 $(document).ready(init);
 
 var currentSection = null;
+var idGame=0;
 function init()
 {
 	currentSection = $('#saludo');
@@ -128,7 +129,8 @@ function dibujarHistorial(datos)
 
 function onClickVerComentarios()
 {
-	getComentariosJuego($(this).parent().attr("id"));
+	idGame=$(this).parent().attr("id");
+	getComentariosJuego(idGame);
 	gotoSection('comentarios');
 }
 function getComentariosJuego(id)
@@ -146,25 +148,29 @@ function dibujarComentarios(datos)
 	var lista=$('#listaComentarios');
 	for(var i in datos)
 	{
-		var html='<li class="list-group-item"  id="'+datos[i].game_id+'">'datos[i].name+ " dice: "+datos[i].content;
+		var html='<li class="list-group-item" >'+datos[i].name+ " dice: "+datos[i].content+'</li>';
 		lista.append(html);
 	}
 	$('#btnEnviarComentario').click(onClickBtnComentar);
 }
 function onClickBtnComentar()
 {
-	var nombre=$('#nombreComenta');
-	var content=$('content');
-	onClickEnviarComentarios($(this).parent().attr("id"), nombre, content);
+	var nombre=$('#nombreComenta').val();
+	var content=$('#content').val();
+
+//console.log(nombre + idGame+ content );
+	onClickEnviarComentarios(idGame, nombre, content);
 }
 
-function onClickEnviarComentarios(nombre, content)
+function onClickEnviarComentarios(idGame, nombre, content)
 {
-	var url='http://test-ta.herokuapp.com/games/'+id+'/comments';
+	var url='http://test-ta.herokuapp.com/games/'+idGame+'/comments';
   	$.ajax({
-   		url:url
+   		url:url,
+   		type:'POST',
+   		data:{comment:{name:nombre, content:content, game_id:idGame}}
     }).done(function(_data)
     {
-    	dibujarComentarios(_data);
+    	//dibujarComentarios(idGame);
     });
 }
