@@ -61,6 +61,8 @@ function onClickHistorial() {
 function onClickBtnSaludo() {
 	gotoSection('nombres');
 }
+
+
 function onClickBtnNombre() {
 
   	validaJugador1();
@@ -121,10 +123,14 @@ function dibujarHistorial(datos)
 		console.log(datos[i].loser_player)
 		var html='<li class="list-group-item">'+datos[i].winner_player+ 
 		" le gano a "+datos[i].loser_player+" en "+datos[i].number_of_turns_to_win+
-		" movimientos"+'<button class="pull-right"> Comentar</button></li>';
-;
+		" movimientos"+'<button class="pull-right  verComentarios" > Comentar</button></li>';
 		lista.append(html);
 	}
+	$('.verComentarios').click(onClickVerComentarios);
 	
 }
 
+function onClickVerComentarios()
+{
+	gotoSection('comentarios');
+}
