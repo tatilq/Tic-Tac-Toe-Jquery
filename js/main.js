@@ -62,7 +62,6 @@ function onClickBtnSaludo() {
 	gotoSection('nombres');
 }
 
-
 function onClickBtnNombre() {
 
   	validaJugador1();
@@ -124,9 +123,7 @@ function dibujarHistorial(datos)
 		" movimientos"+'<button class="pull-right  verComentarios" > Comentar</button></li>';
 		lista.append(html);
 	}
-	//aqui se enlistan los eventos de eta seccion
 	$('.verComentarios').click(onClickVerComentarios);
-	
 }
 
 function onClickVerComentarios()
@@ -149,9 +146,25 @@ function dibujarComentarios(datos)
 	var lista=$('#listaComentarios');
 	for(var i in datos)
 	{
-		var html='<li class="list-group-item">'+datos[i].name+ " dice: "+datos[i].content;
+		var html='<li class="list-group-item"  id="'+datos[i].game_id+'">'datos[i].name+ " dice: "+datos[i].content;
 		lista.append(html);
 	}
-	//aqui se enlistan los eventos de eta seccion
-	//$('.verComentarios').click(onClickVerComentarios);
+	$('#btnEnviarComentario').click(onClickBtnComentar);
+}
+function onClickBtnComentar()
+{
+	var nombre=$('#nombreComenta');
+	var content=$('content');
+	onClickEnviarComentarios($(this).parent().attr("id"), nombre, content);
+}
+
+function onClickEnviarComentarios(nombre, content)
+{
+	var url='http://test-ta.herokuapp.com/games/'+id+'/comments';
+  	$.ajax({
+   		url:url
+    }).done(function(_data)
+    {
+    	dibujarComentarios(_data);
+    });
 }
