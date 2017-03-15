@@ -130,6 +130,7 @@ function dibujarHistorial(datos)
 function onClickVerComentarios()
 {
 	idGame=$(this).parent().attr("id");
+	console.log(idGame);
 	getComentariosJuego(idGame);
 	gotoSection('comentarios');
 }
@@ -157,8 +158,6 @@ function onClickBtnComentar()
 {
 	var nombre=$('#nombreComenta').val();
 	var content=$('#content').val();
-
-//console.log(nombre + idGame+ content );
 	onClickEnviarComentarios(idGame, nombre, content);
 }
 
