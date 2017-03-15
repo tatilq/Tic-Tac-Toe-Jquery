@@ -4,7 +4,7 @@ var numJugadas1=0;
 var numJugadas2=0;
 var llenoA="fullA";
 var llenoB="fullB";
-var ganadoras = [ [0, 1, 2], [3, 4, 5] , [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8]];
+var exitPosition = [ [0, 1, 2], [3, 4, 5] , [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8]];
 var cudraditos=$('.li');
 
 var turno=true;
@@ -22,7 +22,9 @@ function isFull(position)
 function markerPosition(position)
 {
 	var id = $('#'+position);
-	if(turno){
+	if(turno)
+	{
+
 		if(isFull(position))
 		{
 			board[position]=llenoA;
@@ -33,7 +35,10 @@ function markerPosition(position)
 			turno=false;
 			if(isChampion(llenoA))
 			{
-				console.log("ganaste");
+	   			swal({
+      				title: "¡Felicidades "+$("#jugador1").val()+" Ganaste!",
+      				imageUrl: "img/goods.png"
+    			});
 			}
 		}
 	}
@@ -49,7 +54,10 @@ function markerPosition(position)
 			turno=true;
 			if(isChampion(llenoB))
 			{
-				console.log("ganaste");
+				swal({
+      				title: "¡Felicidades "+$("#jugador2").val()+" Ganaste!",
+      				imageUrl: "img/goods.png"
+    			});
 			}
 		}
 
@@ -57,19 +65,24 @@ function markerPosition(position)
 }
 function isChampion(marcador)
 {
-	var flag = true;
-	for( var posGanadoras = 0; posGanadoras < ganadoras.length; posGanadoras++)
+	var isValid = false;
+	for( var i = 0; i < exitPosition.length; i++)
 	{
-		flag = true;
-		for( var pos = 0; pos < ganadoras[posGanadoras].length; pos++){
-			flag = flag && (board[ganadoras[posGanadoras][pos]] == marcador);
-		}
-		if (flag)
+		isValid = true;
+		for( var j = 0; j < exitPosition[i].length; j++)
 		{
-			return flag;
+			isValid = isValid && (board[exitPosition[i][j]] == marcador);
+			if(true)
+			{
+				console.log(board[exitPosition[i][j]]);
+			}
+
 		}
-		
-		flag = false;
+
+		if (isValid)
+		{
+			return isValid;
+		}
 	}
-	return flag;
+	return isValid;
 }
