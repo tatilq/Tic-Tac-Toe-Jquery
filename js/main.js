@@ -111,7 +111,6 @@ function getHistorial()
 
     }).done(function(_data)
     {
-    	console.log(_data);
     	dibujarHistorial(_data);
     });
 }
@@ -120,17 +119,17 @@ function dibujarHistorial(datos)
 	var lista=$('#listaJuegos');
 	for(var i in datos)
 	{
-		console.log(datos[i].loser_player)
 		var html='<li class="list-group-item">'+datos[i].winner_player+ 
 		" le gano a "+datos[i].loser_player+" en "+datos[i].number_of_turns_to_win+
 		" movimientos"+'<button class="pull-right  verComentarios" > Comentar</button></li>';
 		lista.append(html);
 	}
+	//aqui se enlistan los eventos de eta seccion
 	$('.verComentarios').click(onClickVerComentarios);
 	
 }
 
-function onClickVerComentarios()
+function onClickVerComentarios(evt)
 {
 	gotoSection('comentarios');
 }
