@@ -35,10 +35,16 @@ function markerPosition(position)
 			turno=false;
 			if(isChampion(llenoA))
 			{
+				localStorage.setItem('ganador',$("#jugador1").val());
 	   			swal({
       				title: "¡Felicidades "+$("#jugador1").val()+" Ganaste!",
       				imageUrl: "img/goods.png"
     			});
+			}
+			else
+			{
+				localStorage.setItem('perdedor',$("#jugador2").val());
+
 			}
 		}
 	}
@@ -54,10 +60,16 @@ function markerPosition(position)
 			turno=true;
 			if(isChampion(llenoB))
 			{
+				localStorage.setItem('ganador',$("#jugador2").val());
 				swal({
       				title: "¡Felicidades "+$("#jugador2").val()+" Ganaste!",
       				imageUrl: "img/goods.png"
     			});
+			}
+			else
+			{
+				localStorage.setItem('perdedor',$("#jugador1").val());
+
 			}
 		}
 

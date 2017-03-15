@@ -14,6 +14,7 @@ function init()
 	$("#jugador1").keyup(validaJugador1); 
   	$("#jugador2").keyup(validaJugador2);
   	$("#btnEnviarComentario").click(enviarComentarios); 	
+
   	//TweenMax.from($('#saludo h1'), 1, {marginBottom:'0px', ease:Elastic.easeOut});
 }
 /*-------------------------------------------VALIDA JUGADOR1 SEGUN FORMATO VALIDO----------------------------------*/
@@ -161,7 +162,7 @@ function dibujarComentarios(datos)
 function enviarComentarios()
 {
 	var idGame=localStorage.getItem('idGame');
-	var name=localStorage.setItem('nombreComenta');
+	var name=localStorage.getItem('nombreComenta');
 	var content=localStorage.getItem('content');
 	console.log(idGame);
 	if(validaDatosEnvio()){
@@ -189,7 +190,25 @@ function validaDatosEnvio()
 			isValid=true;
 		}
 	}
-
 	return isValid;
+}
+
+function reiniciar()
+{
+
+  window.location="index.html";
+} 
+/*ganador post */
+
+function enviarhistorial(_ganador,_perdedor,_numJugadas){
+	$.ajax({
+		url:'http://test-ta.herokuapp.com/games',
+		type:'POST',
+		data:{
+			game:
+			{ winner_player:_ganador, loser_player:_perdedor, number_of_turns_to_win:_numJugadas }}
+		}).success(function(_data){
+
+	});
 }
 
