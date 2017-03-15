@@ -2,7 +2,7 @@
 $(document).ready(init);
 
 var currentSection = null;
-var idGame=0;
+
 function init()
 {
 	currentSection = $('#saludo');
@@ -12,8 +12,9 @@ function init()
 	$('#inicioLi').click(onClickInicio);
 	$('#historialLi').click(onClickBtnHistorial);
 	$("#jugador1").keyup(validaJugador1); 
-  	$("#jugador2").keyup(validaJugador2); 
- 	//TweenMax.from($('#saludo h1'), 1, {marginBottom:'0px', ease:Elastic.easeOut});
+  	$("#jugador2").keyup(validaJugador2);
+  	$("#btnEnviarComentario").click(enviarComentarios); 	
+  	//TweenMax.from($('#saludo h1'), 1, {marginBottom:'0px', ease:Elastic.easeOut});
 }
 /*-------------------------------------------VALIDA JUGADOR1 SEGUN FORMATO VALIDO----------------------------------*/
 function validaJugador1()
@@ -43,7 +44,9 @@ function validaJugador2()
 		isValid=true;
 	}
 	else
+	{
 		$('#jugador2Error').html("<small style='color:red;'>Debes escribir solo letras </small>");
+	}
 	
 	return isValid;
 }
@@ -119,22 +122,22 @@ function dibujarHistorial(datos)
 	var lista=$('#listaJuegos');
 	for(var i in datos)
 	{
-		var html='<li class="list-group-item" id="'+datos[i].id+'">'+datos[i].winner_player+ 
+		var html='<li class="list-group-item" ><span>'+datos[i].id+'</span>'+datos[i].winner_player+ 
 		" le gano a "+datos[i].loser_player+" en "+datos[i].number_of_turns_to_win+
-		" movimientos"+'<button class="pull-right  verComentarios" > Comentar</button></li>';
+		" movimientos"+'<button class="pull-right  "  id="verComentarios" onclick="onClickVerComentarios('+datos[i].id+')"> Comentar</button></li>';
 		lista.append(html);
-	}
-	$('.verComentarios').click(onClickVerComentarios);
-}
 
-function onClickVerComentarios()
+	}
+	//$('#verComentarios').click(onClickVerComentarios);
+}
+function onClickVerComentarios(id)
 {
-	idGame=$(this).parent().attr("id");
-	console.log(idGame);
-	getComentariosJuego(idGame);
+	console.log(id);
+	localStorage.setItem('idGame',id);
+	getComentarios(id);
 	gotoSection('comentarios');
 }
-function getComentariosJuego(id)
+function getComentarios(id)
 {
 	var url='http://test-ta.herokuapp.com/games/'+id+'/comments';
   	$.ajax({
@@ -152,38 +155,41 @@ function dibujarComentarios(datos)
 		var html='<li class="list-group-item" >'+datos[i].name+ " dice: "+datos[i].content+'</li>';
 		lista.append(html);
 	}
-	$('#btnEnviarComentario').click(onClickBtnComentar);
-}
-function onClickBtnComentar()
-{
-	var nombre=$('#nombreComenta').val();
-	var content=$('#content').val();
-	onClickEnviarComentarios( idGame, nombre, content);
 }
 
-function onClickEnviarComentarios(idGame, nombre, content)
+/*******************************************************FUNCION PARA MANDAR LOS COMENTARIOS**************************************/
+function enviarComentarios()
 {
+	var idGame=localStorage.getItem('idGame');
+	var name=localStorage.setItem('nombreComenta');
+	var content=localStorage.getItem('content');
 	console.log(idGame);
-	var url='http://test-ta.herokuapp.com/games/'+idGame+'/comments';
-  	$.ajax({
-   		url:url,
-   		type:'POST',
-   		data:{comment:{name:nombre, content:content, game_id:idGame}}
-    }).done(function(_data)
-    {
-    	console.log(idGame)
-    	//dibujarComentarios(idGame);
-    });
+	if(validaDatosEnvio()){
+		var url='http://test-ta.herokuapp.com/games/'+idGame+'/comments';
+	  	$.ajax({
+	   		url:url,
+	   		type:'POST',
+	   		data:{comment:{name:name, content:content, game_id:idGame}}
+	    }).done(function(_data)
+	    {
+	    	//aqui hacer lgo pra que se actualice
+	    	//limpiarDatos();
+	    });
+	}
 }
-/*
-function enviarHistorial(_ganador,_perdedor,_numJugadas){
-	$.ajax({
-		url:'http://test-ta.herokuapp.com/games',
-		type:'POST',
-		data:{
-			game:
-			{ winner_player:_ganador, loser_player:_perdedor, number_of_turns_to_win:_numJugadas }}
-	}).success(function(_data){
+function validaDatosEnvio()
+{
+	var isValid=false;
+	if($('#nombreComenta').val().length>0 && $('#content').val().length>0)
+	{
+		if(isAlphabetic($('#nombreComenta').val()) && isAlphabetic($('#content').val()))
+		{
+			localStorage.setItem('nombreComenta',$('#nombreComenta').val());
+			localStorage.setItem('content',$('#content').val());
+			isValid=true;
+		}
+	}
 
-	});
-}*/
+	return isValid;
+}
+
