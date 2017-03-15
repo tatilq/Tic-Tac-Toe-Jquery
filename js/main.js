@@ -119,7 +119,7 @@ function dibujarHistorial(datos)
 	var lista=$('#listaJuegos');
 	for(var i in datos)
 	{
-		var html='<li class="list-group-item">'+datos[i].winner_player+ 
+		var html='<li class="list-group-item" id="'+datos[i].id+'">'+datos[i].winner_player+ 
 		" le gano a "+datos[i].loser_player+" en "+datos[i].number_of_turns_to_win+
 		" movimientos"+'<button class="pull-right  verComentarios" > Comentar</button></li>';
 		lista.append(html);
@@ -129,7 +129,29 @@ function dibujarHistorial(datos)
 	
 }
 
-function onClickVerComentarios(evt)
+function onClickVerComentarios()
 {
+	getComentariosJuego($(this).parent().attr("id"));
 	gotoSection('comentarios');
+}
+function getComentariosJuego(id)
+{
+	var url='http://test-ta.herokuapp.com/games/'+id+'/comments';
+  	$.ajax({
+   		url:url
+    }).done(function(_data)
+    {
+    	dibujarComentarios(_data);
+    });
+}
+function dibujarComentarios(datos)
+{
+	var lista=$('#listaComentarios');
+	for(var i in datos)
+	{
+		var html='<li class="list-group-item">'+datos[i].name+ " dice: "+datos[i].content;
+		lista.append(html);
+	}
+	//aqui se enlistan los eventos de eta seccion
+	//$('.verComentarios').click(onClickVerComentarios);
 }
