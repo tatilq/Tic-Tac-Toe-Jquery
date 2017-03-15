@@ -158,11 +158,12 @@ function onClickBtnComentar()
 {
 	var nombre=$('#nombreComenta').val();
 	var content=$('#content').val();
-	onClickEnviarComentarios(idGame, nombre, content);
+	onClickEnviarComentarios( idGame, nombre, content);
 }
 
 function onClickEnviarComentarios(idGame, nombre, content)
 {
+	console.log(idGame);
 	var url='http://test-ta.herokuapp.com/games/'+idGame+'/comments';
   	$.ajax({
    		url:url,
@@ -170,10 +171,11 @@ function onClickEnviarComentarios(idGame, nombre, content)
    		data:{comment:{name:nombre, content:content, game_id:idGame}}
     }).done(function(_data)
     {
+    	console.log(idGame)
     	//dibujarComentarios(idGame);
     });
 }
-
+/*
 function enviarHistorial(_ganador,_perdedor,_numJugadas){
 	$.ajax({
 		url:'http://test-ta.herokuapp.com/games',
@@ -184,4 +186,4 @@ function enviarHistorial(_ganador,_perdedor,_numJugadas){
 	}).success(function(_data){
 
 	});
-}
+}*/
