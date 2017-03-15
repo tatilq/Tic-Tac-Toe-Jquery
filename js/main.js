@@ -198,16 +198,19 @@ function reiniciar()
 
   window.location="index.html";
 } 
-/*ganador post */
+/***********************************************MAND UN POST DEL GNADOR *****************/
 
-function enviarhistorial(_ganador,_perdedor,_numJugadas){
+function enviarhistorial(){
+	var ganador=localStorage.getItem('ganador');
+	var perdedor=localStorage.getItem('perdedor');
+	var jugadas=localStorage.getItem('numJugadas');
 	$.ajax({
 		url:'http://test-ta.herokuapp.com/games',
 		type:'POST',
 		data:{
 			game:
-			{ winner_player:_ganador, loser_player:_perdedor, number_of_turns_to_win:_numJugadas }}
-		}).success(function(_data){
+			{ winner_player:ganador, loser_player:perdedor, number_of_turns_to_win:jugadas }}
+		}).done(function(_data){
 
 	});
 }

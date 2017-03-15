@@ -36,15 +36,13 @@ function markerPosition(position)
 			if(isChampion(llenoA))
 			{
 				localStorage.setItem('ganador',$("#jugador1").val());
+				localStorage.setItem('perdedor',$("#jugador2").val());
+				localStorage.setItem('numJugadas', numJugadas1);
+
 	   			swal({
       				title: "¡Felicidades "+$("#jugador1").val()+" Ganaste!",
       				imageUrl: "img/goods.png"
     			});
-			}
-			else
-			{
-				localStorage.setItem('perdedor',$("#jugador2").val());
-
 			}
 		}
 	}
@@ -61,15 +59,13 @@ function markerPosition(position)
 			if(isChampion(llenoB))
 			{
 				localStorage.setItem('ganador',$("#jugador2").val());
+				localStorage.setItem('perdedor',$("#jugador1").val());
+
+				localStorage.setItem('numJugadas',numJugadas2);
 				swal({
       				title: "¡Felicidades "+$("#jugador2").val()+" Ganaste!",
       				imageUrl: "img/goods.png"
     			});
-			}
-			else
-			{
-				localStorage.setItem('perdedor',$("#jugador1").val());
-
 			}
 		}
 
