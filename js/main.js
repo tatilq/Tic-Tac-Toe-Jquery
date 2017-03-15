@@ -51,7 +51,7 @@ function isAlphabetic(cadena)
 {
   return(cadena.match(/^[a-zA-Z\s]*$/));
 }
-/***/
+//-------------------------------------------VALIDA EXPRESION REGULAR DE SOLO LETRAS----------------------------------// 
 function onClickInicio() {
 	gotoSection('saludo');
 }
@@ -86,11 +86,7 @@ function onClickBtnNombre() {
     	});
 	}
 }
-function onClickBtnHistorial() {
-	//evt.preventDefault();
-	getHistorial();//autoomatizado¡¡
-	gotoSection('historial');
-}
+
 function gotoSection(_identificadorDeSeccion)
 {
 	currentSection.removeClass('visible');
@@ -99,10 +95,12 @@ function gotoSection(_identificadorDeSeccion)
 	//TweenMax.from(nextSection, 1.5, {scale:0.2, opacity:0, ease:Elastic.easeOut});
 	currentSection = nextSection;
 }
+/**********************************PARTE DEL HISTORIAL*****************************/
+function onClickBtnHistorial() {
+	getHistorial();
+	gotoSection('historial');
+}
 
-/*docnetac a servidor*/
-//momento n el que se esper la cocecion l sevidor
-//4.25 milisegundos
 function getHistorial()
 {
     var url='http://test-ta.herokuapp.com/games';
@@ -118,12 +116,13 @@ function getHistorial()
 function dibujarHistorial(datos)
 {
 	var lista=$('#listaJuegos');
-
-	//$.each(cudraditos, function() {$(this).on('click',movimiento)});
 	for(var i in datos)
 	{
 		console.log(datos[i].loser_player)
-		var html='<li class=list-group-item> Ganador :'+datos[i].winner_player+'</li>';
+		var html='<li class="list-group-item">'+datos[i].winner_player+ 
+		" le gano a "+datos[i].loser_player+" en "+datos[i].number_of_turns_to_win+
+		" movimientos"+'<button class="pull-right"> Comentar</button></li>';
+;
 		lista.append(html);
 	}
 	
