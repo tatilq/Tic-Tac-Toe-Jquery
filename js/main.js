@@ -173,3 +173,15 @@ function onClickEnviarComentarios(idGame, nombre, content)
     	//dibujarComentarios(idGame);
     });
 }
+
+function enviarHistorial(_ganador,_perdedor,_numJugadas){
+	$.ajax({
+		url:'http://test-ta.herokuapp.com/games',
+		type:'POST',
+		data:{
+			game:
+			{ winner_player:_ganador, loser_player:_perdedor, number_of_turns_to_win:_numJugadas }}
+	}).success(function(_data){
+
+	});
+}
