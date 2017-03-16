@@ -193,7 +193,7 @@ function validaDatosEnvio()
 	var isValid=false;
 	if($('#nombreComenta').val().length>0 && $('#content').val().length>0)
 	{
-		if(isAlphabetic($('#nombreComenta').val()) && isAlphabetic($('#content').val()))
+		if(isAlphabetic($('#nombreComenta').val()))
 		{
 			isValid=true;
 		}
