@@ -3,6 +3,7 @@
 $(document).ready(init);
 
 var currentSection = null;
+var currentId= null; 
 
 function init()
 {
@@ -14,8 +15,8 @@ function init()
 	$('#historialLi').click(onClickBtnHistorial);
 	$("#jugador1").keyup(validaJugador1); 
   	$("#jugador2").keyup(validaJugador2);
-  	$("#btnEnviarComentario").click(enviarComentarios); 	
-
+  	$('#listaJuegos').on('click','#verComentarios',onClickVerComentarios);
+  	$("#btnEnviarComentario").click(enviarComentarios);
   	TweenMax.from($('#saludo h1'), 3, {marginBottom:'15px', ease:Elastic.easeOut});
 }
 /*---------------------VALIDA JUGADOR1 SEGUN FORMATO VALIDO--------------------*/
@@ -127,19 +128,21 @@ function dibujarHistorial(datos)
 	var lista=$('#listaJuegos');
 	for(var i in datos)
 	{
-		var html='<li  ><span>'+datos[i].id+'</span>'+" "+datos[i].winner_player+ 
+		var html='<li  data-idgame='+ datos[i].id +'>'+datos[i].winner_player+ 
 		" le gano a "+datos[i].loser_player+" en "+datos[i].number_of_turns_to_win+
-		" movimientos"+'<button class="pull-right  "  id="verComentarios" onclick="onClickVerComentarios('+datos[i].id+')"> Comentar</button></li><br>';
+		" movimientos"+'<button class="pull-right  "  id="verComentarios"> Comentar</button></li><br>';
 		lista.append(html);
 
 	}
 }
 //--------------------FUNCION QUE MUESTRA UNA LISTA DE LOS COMENTARIOS--------------------// 
-function onClickVerComentarios(id)
+function onClickVerComentarios()
 {
-	localStorage.setItem('idGame',id);
-	getComentarios(id);
+	var idGame=($(this).parent().data('idgame'))
+	currentId=idGame;
 	gotoSection('comentarios');
+	getComentarios(idGame);
+
 }
 //--------------------FUNCION QUE SOLICITA LOS COMENTARIOS--------------------// 
 function getComentarios(id)
@@ -147,6 +150,7 @@ function getComentarios(id)
 	var url='https://test-ta.herokuapp.com/games/'+id+'/comments';
   	$.ajax({
    		url:url,
+   		type: 'GET'
     }).done(function(_data)
     {
     	dibujarComentarios(_data);
@@ -156,29 +160,28 @@ function getComentarios(id)
 function dibujarComentarios(datos)
 {
 	var lista=$('#listaComentarios');
+	lista.empty();
 	for(var i in datos)
 	{
 		var html='<li class="list-group-item" >'+datos[i].name+ " dice: "+datos[i].content+'</li><br>';
 		lista.append(html);
 	}
+ 	
 }
 
 /*******************************************************FUNCION PARA MANDAR LOS COMENTARIOS**************************************/
 function enviarComentarios()
 {
-	var idGame=localStorage.getItem('idGame');
-	var name=localStorage.getItem('nombreComenta');
-	var content=localStorage.getItem('content');
-	console.log(idGame);
+
 	if(validaDatosEnvio()){
-		var url='https://test-ta.herokuapp.com/games/'+idGame+'/comments';
+		var url='https://test-ta.herokuapp.com/games/'+currentId+'/comments';
 	  	$.ajax({
 	   		url:url,
 	   		type:'POST',
-	   		data:{comment:{name:name, content:content, game_id:idGame}}
+	   		data:{comment:{name:$('#nombreComenta').val(), content:$('#content').val(), game_id:currentId}}
 	    }).done(function(_data)
 	    {
-	    	getComentarios(idGame);
+	    	getComentarios(currentId);
 	    	$('#nombreComenta').val("");
 	    	$('#content').val("");
 	    });
@@ -192,19 +195,20 @@ function validaDatosEnvio()
 	{
 		if(isAlphabetic($('#nombreComenta').val()) && isAlphabetic($('#content').val()))
 		{
-			localStorage.setItem('nombreComenta',$('#nombreComenta').val());
-			localStorage.setItem('content',$('#content').val());
 			isValid=true;
 		}
 	}
+	else
+	{
+		swal({
+      		title: "¡No puedes enviar datos vacios!",
+      		imageUrl: "img/bads.png"
+    	});
+
+	}
 	return isValid;
 }
-/********************************FUNCION QUE REINICIA**************************************/
-function reiniciar()
-{
 
-  window.location="index.html";
-} 
 /***********************************************MANDA UN POST DEL GANADOR *****************/
 
 function enviarhistorial(){
@@ -225,4 +229,9 @@ function enviarhistorial(){
 
 	});
 }
+/********************************FUNCION QUE REINICIA**************************************/
+function reiniciar()
+{
+  window.location.reload();
+} 
 /*********************************************FIN******************************+*****************/

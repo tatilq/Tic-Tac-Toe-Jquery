@@ -4,7 +4,7 @@ var numJugadas1=0;
 var numJugadas2=0;
 var llenoA="fullA";
 var llenoB="fullB";
-var exitPosition = [ [0, 1, 2], [3, 4, 5] , [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8]];
+var exitPosition = [ [0, 1, 2], [3, 4, 5] , [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8],[2, 4, 6]];
 var cudraditos=$('.li');
 
 var turno=true;
@@ -79,11 +79,6 @@ function isChampion(marcador)
 		for( var j = 0; j < exitPosition[i].length; j++)
 		{
 			isValid = isValid && (board[exitPosition[i][j]] == marcador);
-			if(true)
-			{
-				console.log(board[exitPosition[i][j]]);
-			}
-
 		}
 
 		if (isValid)
