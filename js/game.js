@@ -9,16 +9,18 @@ var cudraditos=$('.li');
 
 var turno=true;
 $.each(cudraditos, function() {$(this).on('click',movimiento)});
-
+/***************************FUNCION QUE REGIUSTRA UN MOVIMIENTO*****************/
 function movimiento(evt)
 {
 	var position=$(evt.currentTarget).attr('id');
 	markerPosition(position);
 }
+/********************FUNCION QUE DETERMINA SI UNA CASILLA ESTA LLENA*************/
 function isFull(position)
 {
 	return(board[position]==null);
 }
+/*********************FUNCION QUE MARCA UNA POSICION*****************************/
 function markerPosition(position)
 {
 	var id = $('#'+position);
@@ -44,6 +46,10 @@ function markerPosition(position)
     			});
 			}
 		}
+		else
+		{
+			alert("Esta posicion ya esta llena");
+		}
 	}
 	else
 	{
@@ -67,9 +73,14 @@ function markerPosition(position)
     			});
 			}
 		}
+		else
+		{
+			alert("Esta posicion ya esta llena");
+		}
 
 	}
 }
+/*************************FUNCION QUE DETERMINA SI ES CAMPEON UN JUGADOR************************/
 function isChampion(marcador)
 {
 	var isValid = false;
