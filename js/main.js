@@ -1,3 +1,4 @@
+/*-----------------------FUNCION QUE SE EJECUTA CUANDO TERMINE DE CARGAR LA PAGINA------------*/
 
 $(document).ready(init);
 
@@ -17,7 +18,7 @@ function init()
 
   	TweenMax.from($('#saludo h1'), 3, {marginBottom:'15px', ease:Elastic.easeOut});
 }
-/*-------------------------------------------VALIDA JUGADOR1 SEGUN FORMATO VALIDO----------------------------------*/
+/*---------------------VALIDA JUGADOR1 SEGUN FORMATO VALIDO--------------------*/
 function validaJugador1()
 {
 	var isValid=false;
@@ -33,7 +34,7 @@ function validaJugador1()
 	
 	return isValid;
 }
-//-------------------------------------------VALIDA JUGADOR2 SEGUN FORMATO VALIDO----------------------------------//
+//----------------------VALIDA JUGADOR2 SEGUN FORMATO VALIDO-----------------//
 function validaJugador2()
 {
 	var isValid=false;
@@ -51,22 +52,29 @@ function validaJugador2()
 	
 	return isValid;
 }
-//-------------------------------------------VALIDA EXPRESION REGULAR DE SOLO LETRAS----------------------------------// 
+//---------------------VALIDA EXPRESION REGULAR DE SOLO LETRAS-------------------// 
 function isAlphabetic(cadena)
 {
   return(cadena.match(/^[a-zA-Z\s]*$/));
 }
-//-------------------------------------------VALIDA EXPRESION REGULAR DE SOLO LETRAS----------------------------------// 
+//--------------------PASA A LA PAGINA DE INICIO--------------------// 
 function onClickInicio() {
 	gotoSection('saludo');
 }
+//--------------------PASA A LA PAGINA DE HISTORIAL--------------------// 
 function onClickHistorial() {
 	gotoSection('historial');
 }
+//--------------------PASA A LA PAGINA DE LOGIN--------------------// 
 function onClickBtnSaludo() {
 	gotoSection('nombres');
 }
-
+/******************************PASA A L PAGINA DEL HISTORIAL**************************/
+function onClickBtnHistorial() {
+	getHistorial();
+	gotoSection('historial');
+}
+//--------------------FUNCION QUE VALIDA NOMBRES DE JUGADORES--------------// 
 function onClickBtnNombre() {
 
   	validaJugador1();
@@ -92,7 +100,7 @@ function onClickBtnNombre() {
     	});
 	}
 }
-
+//--------------------PASA A LA PAGINA QUE SE LE ASIGNE SEGUN ID--------------------// 
 function gotoSection(_identificadorDeSeccion)
 {
 	currentSection.removeClass('visible');
@@ -101,12 +109,7 @@ function gotoSection(_identificadorDeSeccion)
 	//sTweenMax.from(nextSection, 1.5, {scale:0.2, opacity:0, ease:Elastic.easeOut});
 	currentSection = nextSection;
 }
-/**********************************PARTE DEL HISTORIAL*****************************/
-function onClickBtnHistorial() {
-	getHistorial();
-	gotoSection('historial');
-}
-
+//--------------------HCE UN GET AL SERVIDOR DE JUEGOS--------------------// 
 function getHistorial()
 {
     var url='https://test-ta.herokuapp.com/games';
@@ -118,6 +121,7 @@ function getHistorial()
     	dibujarHistorial(_data);
     });
 }
+//--------------------DIBUJA EL HISTORIAL DE LA RESPUESTA--------------------// 
 function dibujarHistorial(datos)
 {
 	var lista=$('#listaJuegos');
@@ -129,15 +133,15 @@ function dibujarHistorial(datos)
 		lista.append(html);
 
 	}
-	//$('#verComentarios').click(onClickVerComentarios);
 }
+//--------------------FUNCION QUE MUESTRA UNA LISTA DE LOS COMENTARIOS--------------------// 
 function onClickVerComentarios(id)
 {
-	console.log(id);
 	localStorage.setItem('idGame',id);
 	getComentarios(id);
 	gotoSection('comentarios');
 }
+//--------------------FUNCION QUE SOLICITA LOS COMENTARIOS--------------------// 
 function getComentarios(id)
 {
 	var url='https://test-ta.herokuapp.com/games/'+id+'/comments';
@@ -148,6 +152,7 @@ function getComentarios(id)
     	dibujarComentarios(_data);
     });
 }
+//-----------------FUNCION QUE DIBUJA LOS COMENTARIOS-------------------// 
 function dibujarComentarios(datos)
 {
 	var lista=$('#listaComentarios');
@@ -173,11 +178,16 @@ function enviarComentarios()
 	   		data:{comment:{name:name, content:content, game_id:idGame}}
 	    }).done(function(_data)
 	    {
-	    	//aqui hacer lgo pra que se actualice
-	    	//limpiarDatos();
+	    	swal({
+      		title: "¡Comentario Enviado!",
+      		imageUrl: "img/goods.png"
+    		});
+	    	
 	    });
 	}
+
 }
+/*******************************************************FUNCION QUE VALIDA DATOS DE ENVIO**************************************/
 function validaDatosEnvio()
 {
 	var isValid=false;
@@ -192,13 +202,13 @@ function validaDatosEnvio()
 	}
 	return isValid;
 }
-
+/********************************FUNCION QUE REINICIA**************************************/
 function reiniciar()
 {
 
   window.location="index.html";
 } 
-/***********************************************MAND UN POST DEL GNADOR *****************/
+/***********************************************MANDA UN POST DEL GANADOR *****************/
 
 function enviarhistorial(){
 	var ganador=localStorage.getItem('ganador');
@@ -217,4 +227,4 @@ function enviarhistorial(){
     	});
 	});
 }
-
+/*********************************************FIN******************************+*****************/
