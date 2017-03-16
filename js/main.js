@@ -25,11 +25,11 @@ function validaJugador1()
 
 	if(jugador1.length>0 && isAlphabetic(jugador1))
 	{
-		$('#jugador1Error').html("<small style='color:green;'>Correcto ✔</small>");
+		$('#jugador1').css('background','white');
 		isValid=true;
 	}
 	else
-		$('#jugador1Error').html("<small style='color:red;'>Debes escribir solo letras </small>");
+		$('#jugador1').css('background','#F9A8BC');
 	
 	return isValid;
 }
@@ -41,12 +41,12 @@ function validaJugador2()
 
 	if(jugador2.length>0 && isAlphabetic(jugador2))
 	{
-		$('#jugador2Error').html("<small style='color:green;'>Correcto ✔</small>");
+		$('#jugador2').css('background','white');
 		isValid=true;
 	}
 	else
 	{
-		$('#jugador2Error').html("<small style='color:red;'>Debes escribir solo letras </small>");
+		$('#jugador2').css('background','#F9A8BC');
 	}
 	
 	return isValid;
