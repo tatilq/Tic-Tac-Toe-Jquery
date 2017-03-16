@@ -1,3 +1,13 @@
+.navbar-default .navbar-toggle {
+    border-color: black;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: black;
+}
+.navbar-default .navbar-nav>li>a {
+    color: black; 
+    border-left: none;
+}
 body {
   text-align: center;
   font-size: 16px;
@@ -7,7 +17,17 @@ header
 {
 	position: relative;
 	z-index:100;
+	
 }
+.logo
+{
+	width: 15%;
+}
+.navbar-default
+{
+	background: #09A662;
+}
+
 section
 {
 	background-image:url('http://www.marcelopedra.com.ar/blog/wp-content/uploads/2013/10/animated-gifs-of-fighting-game-backgrounds-101.gif');
