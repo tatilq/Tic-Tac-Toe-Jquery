@@ -172,4 +172,15 @@ section
 	background-color: green;
 	border:1px solid white;
 }
-
+#comentarios  .form-group, #comentarios  h2
+{
+	color: white;
+}
+ul
+{
+	color: white;
+}
+.list-group-item
+{
+	background-color: rgba(23,129,86,0.4);
+}

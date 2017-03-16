@@ -123,7 +123,7 @@ function dibujarHistorial(datos)
 	var lista=$('#listaJuegos');
 	for(var i in datos)
 	{
-		var html='<li class="" ><span>'+datos[i].id+'</span>'+" "+datos[i].winner_player+ 
+		var html='<li  ><span>'+datos[i].id+'</span>'+" "+datos[i].winner_player+ 
 		" le gano a "+datos[i].loser_player+" en "+datos[i].number_of_turns_to_win+
 		" movimientos"+'<button class="pull-right  "  id="verComentarios" onclick="onClickVerComentarios('+datos[i].id+')"> Comentar</button></li><br>';
 		lista.append(html);
@@ -142,7 +142,7 @@ function getComentarios(id)
 {
 	var url='https://test-ta.herokuapp.com/games/'+id+'/comments';
   	$.ajax({
-   		url:url
+   		url:url,
     }).done(function(_data)
     {
     	dibujarComentarios(_data);
@@ -153,7 +153,7 @@ function dibujarComentarios(datos)
 	var lista=$('#listaComentarios');
 	for(var i in datos)
 	{
-		var html='<li class="list-group-item" >'+datos[i].name+ " dice: "+datos[i].content+'</li>';
+		var html='<li class="list-group-item" >'+datos[i].name+ " dice: "+datos[i].content+'</li><br>';
 		lista.append(html);
 	}
 }
