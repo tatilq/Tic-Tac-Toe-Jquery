@@ -178,14 +178,11 @@ function enviarComentarios()
 	   		data:{comment:{name:name, content:content, game_id:idGame}}
 	    }).done(function(_data)
 	    {
-	    	swal({
-      		title: "¡Comentario Enviado!",
-      		imageUrl: "img/goods.png"
-    		});
-	    	
+	    	getComentarios(idGame);
+	    	$('#nombreComenta').val("");
+	    	$('#content').val("");
 	    });
 	}
-
 }
 /*******************************************************FUNCION QUE VALIDA DATOS DE ENVIO**************************************/
 function validaDatosEnvio()
@@ -225,6 +222,7 @@ function enviarhistorial(){
       		title: "¡Enviado al historial!",
       		imageUrl: "img/goods.png"
     	});
+
 	});
 }
 /*********************************************FIN******************************+*****************/
