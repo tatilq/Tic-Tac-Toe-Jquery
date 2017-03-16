@@ -9,13 +9,13 @@ function init()
 	$('#btn-saludo').click(onClickBtnSaludo);
 	$('#btn-nombres').click(onClickBtnNombre);
 	$('#btn-historial').click(onClickBtnHistorial);
-	$('#inicioLi').click(onClickInicio);
+	$('#inicioLi').click(reiniciar);
 	$('#historialLi').click(onClickBtnHistorial);
 	$("#jugador1").keyup(validaJugador1); 
   	$("#jugador2").keyup(validaJugador2);
   	$("#btnEnviarComentario").click(enviarComentarios); 	
 
-  	//TweenMax.from($('#saludo h1'), 1, {marginBottom:'0px', ease:Elastic.easeOut});
+  	TweenMax.from($('#saludo h1'), 3, {marginBottom:'15px', ease:Elastic.easeOut});
 }
 /*-------------------------------------------VALIDA JUGADOR1 SEGUN FORMATO VALIDO----------------------------------*/
 function validaJugador1()
@@ -98,7 +98,7 @@ function gotoSection(_identificadorDeSeccion)
 	currentSection.removeClass('visible');
 	var nextSection = $('#'+_identificadorDeSeccion);
 	nextSection.addClass('visible');
-	//TweenMax.from(nextSection, 1.5, {scale:0.2, opacity:0, ease:Elastic.easeOut});
+	//sTweenMax.from(nextSection, 1.5, {scale:0.2, opacity:0, ease:Elastic.easeOut});
 	currentSection = nextSection;
 }
 /**********************************PARTE DEL HISTORIAL*****************************/
@@ -123,9 +123,9 @@ function dibujarHistorial(datos)
 	var lista=$('#listaJuegos');
 	for(var i in datos)
 	{
-		var html='<li class="list-group-item" ><span>'+datos[i].id+'</span>'+datos[i].winner_player+ 
+		var html='<li class="" ><span>'+datos[i].id+'</span>'+" "+datos[i].winner_player+ 
 		" le gano a "+datos[i].loser_player+" en "+datos[i].number_of_turns_to_win+
-		" movimientos"+'<button class="pull-right  "  id="verComentarios" onclick="onClickVerComentarios('+datos[i].id+')"> Comentar</button></li>';
+		" movimientos"+'<button class="pull-right  "  id="verComentarios" onclick="onClickVerComentarios('+datos[i].id+')"> Comentar</button></li><br>';
 		lista.append(html);
 
 	}
@@ -211,7 +211,10 @@ function enviarhistorial(){
 			game:
 			{ winner_player:ganador, loser_player:perdedor, number_of_turns_to_win:jugadas }}
 		}).done(function(_data){
-
+			swal({
+      		title: "¡Enviado al historial!",
+      		imageUrl: "img/goods.png"
+    	});
 	});
 }
 

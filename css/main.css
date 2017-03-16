@@ -8,7 +8,8 @@
     color: black; 
     border-left: none;
 }
-body {
+body 
+{
   text-align: center;
   font-size: 16px;
   font-family: 'Comic Sans MS', Helvetica, sans-serif;
@@ -16,21 +17,19 @@ body {
 header
 {
 	position: relative;
-	z-index:100;
-	
+	z-index:100;	
 }
 .logo
 {
-	width: 15%;
+	width: 10%;
 }
 .navbar-default
 {
 	background: #09A662;
 }
-
 section
 {
-	background-image:url('http://www.marcelopedra.com.ar/blog/wp-content/uploads/2013/10/animated-gifs-of-fighting-game-backgrounds-101.gif');
+	background-image:url('../img/fondo.gif');
 	background-position: center center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -47,15 +46,19 @@ section
 {
 	display: inline-block;
 	width: 80px;
-	border: 3px inset #F84343;
+	border: 3px inset green;
+	background-color: #ED4892;
 	height: 80px;
+	background-color: #A68522;
 	margin: 0 auto;
-	}
+}
 .fa
 {
 	font-size: 50px;
+	border: 1px solid white;
 	margin: 12px auto;
-	color: #F84343;
+	color: green;
+	background-color: #A68522;
 }
 #btn-nombres
 {
@@ -83,34 +86,39 @@ section
 	vertical-align: middle;
 }
 
-#juego
+#historial,#comentarios
 {
-	
-	background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover ;  
-
+	background:#C67625;
+}
+#historial h2
+{
+	color:white;
+	font-size: 50px;
 }
 .table
 {
 	margin-top: 10px;
 }
+.jugadores span
+{
+	color: white;
+}
 #nombres h2
 {
 	margin-bottom:40px;
 	font-size: 40px;
-
 }
 #juego h2
 {
 	margin:20px 0px;
+	font-size: 40px;
+	color: white;
+	font-size: bold;
 }
 #historial h2
 {
 	margin:80px 0px 20px 0px;
 }
-/**/
 #saludo h1
 {
 	margin-bottom:80px;
@@ -120,10 +128,17 @@ section
 }
 .degradado
 {
-	/*outline:1px solid red;*/
-	margin: 20px 0px 0px 0px;
+	margin: 30px 0px 0px 0px;
 	padding: 15px 0px ;
 	border:2px outset green;
+	border-radius: 30px;
+	background-color: rgba(23,129,86,0.4);
+}
+.degradadoGame
+{
+	margin: 30px 0px 0px 0px;
+	padding: 5px;
+	border:2px solid green;
 	border-radius: 30px;
 	background-color: rgba(23,129,86,0.4);
 }
@@ -133,6 +148,26 @@ section
 	font-size: 20px;
 	color: white;
 	padding: 15px;
+	border:1px solid green;
+	background-color: green;
+	border:1px solid white;
+}
+#btn-historial, #btn-enviarhistorial, #btnReiniciar
+{
+	border-radius: 20px;
+	font-size: 15px;
+	color: white;
+	padding: 10px;
+	border:1px solid green;
+	background-color: green;
+	border:1px solid white;
+}
+#verComentarios , #btnEnviarComentario
+{
+	border-radius: 20px;
+	font-size: 15px;
+	color: white;
+	padding: 10px;
 	border:1px solid green;
 	background-color: green;
 	border:1px solid white;

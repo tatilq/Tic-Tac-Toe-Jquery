@@ -24,13 +24,12 @@ function markerPosition(position)
 	var id = $('#'+position);
 	if(turno)
 	{
-
 		if(isFull(position))
 		{
 			board[position]=llenoA;
 			numJugadas1++;
 			id.find('i').remove();
-			id.append('<i class="fa fa-circle animated rubberBand " aria-hidden="true"></i>');
+			id.append('<i class="fa fa-circle animated rubberBand " aria-hidden="true" style="color:#BC2A59;"></i>');
 			$('#mov1').text(numJugadas1);
 			turno=false;
 			if(isChampion(llenoA))
@@ -53,7 +52,7 @@ function markerPosition(position)
 			board[position]=llenoB;
 			numJugadas2++;
 			id.find('i').remove();
-			id.append('<i class="fa fa-heart animated rubberBand " aria-hidden="true"></i>');
+			id.append('<i class="fa fa-heart animated rubberBand " aria-hidden="true" style="color:#2ABCA4;"></i>');
 			$('#mov2').text(numJugadas2);
 			turno=true;
 			if(isChampion(llenoB))
