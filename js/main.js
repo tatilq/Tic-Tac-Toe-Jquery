@@ -109,7 +109,7 @@ function onClickBtnHistorial() {
 
 function getHistorial()
 {
-    var url='http://test-ta.herokuapp.com/games';
+    var url='https://test-ta.herokuapp.com/games';
   	$.ajax({
    		url:url
 
@@ -140,7 +140,7 @@ function onClickVerComentarios(id)
 }
 function getComentarios(id)
 {
-	var url='http://test-ta.herokuapp.com/games/'+id+'/comments';
+	var url='https://test-ta.herokuapp.com/games/'+id+'/comments';
   	$.ajax({
    		url:url
     }).done(function(_data)
@@ -166,7 +166,7 @@ function enviarComentarios()
 	var content=localStorage.getItem('content');
 	console.log(idGame);
 	if(validaDatosEnvio()){
-		var url='http://test-ta.herokuapp.com/games/'+idGame+'/comments';
+		var url='https://test-ta.herokuapp.com/games/'+idGame+'/comments';
 	  	$.ajax({
 	   		url:url,
 	   		type:'POST',
@@ -205,7 +205,7 @@ function enviarhistorial(){
 	var perdedor=localStorage.getItem('perdedor');
 	var jugadas=localStorage.getItem('numJugadas');
 	$.ajax({
-		url:'http://test-ta.herokuapp.com/games',
+		url:'https://test-ta.herokuapp.com/games',
 		type:'POST',
 		data:{
 			game:
